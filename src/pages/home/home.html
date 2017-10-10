@@ -1,0 +1,35 @@
+<ion-header>
+  <ion-navbar>
+    <ion-title>
+      <ion-buttons end>
+        <button ion-button (click)="toggleReorder()">Edit</button>
+      </ion-buttons>
+      Contact Book
+    </ion-title>
+  </ion-navbar>
+</ion-header>
+
+<ion-content padding>
+  <ion-refresher (ionRefresh)="doRefresh($event)">
+    <ion-refresher-content></ion-refresher-content>
+  </ion-refresher>
+  <ion-list [reorder]="shouldReorder" 
+            (ionItemReorder)="$event.applyTo(people)"
+           >
+    <ion-item-sliding *ngFor="let person of people"  >
+        <ion-item (click)="pushPage(person)" >
+            <ion-avatar item-left>
+              <img [src]="person.picture.thumbnail" />
+            </ion-avatar>
+            {{person.name.first}}{{person.name.last}}
+            <ion-note>{{person.phone}}</ion-note>
+          </ion-item>
+          <ion-item-options side="right">
+            <button ion-button>Hello</button>
+          </ion-item-options>
+    </ion-item-sliding>
+  </ion-list>
+  <ion-infinite-scroll (ionInfinite)="doInfinite($event)">
+    <ion-infinite-scroll-content></ion-infinite-scroll-content>
+  </ion-infinite-scroll>  
+</ion-content>

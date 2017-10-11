@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams } from 'ionic-angular';
+import { IonicPage, NavController, AlertController, NavParams,ViewController } from 'ionic-angular';
 
 /**
  * Generated class for the DetailPage page.
@@ -15,9 +15,27 @@ import { IonicPage, NavController, NavParams } from 'ionic-angular';
 })
 export class DetailPage {
   public user=this.navParams.data;
-  constructor(public navCtrl: NavController, public navParams: NavParams) {
+  constructor(public alertCtrl:AlertController,public viewCtrl:ViewController, public navCtrl: NavController, public navParams: NavParams) {
   }
-
+  dismiss(){
+    let alert = this.alertCtrl.create({
+      title: 'Close Modal?',
+      message: 'are you sure?',
+      buttons: [{
+        text: 'Cancel',
+        role: 'cancel',
+        handler: ()=>{
+          console.log('clicked');
+        }
+      },{
+        text: 'yes',
+        handler: ()=>{
+          this.viewCtrl.dismiss()
+        }
+      }]
+    })
+    alert.present()
+  }
   ionViewDidLoad() {
     console.log('ionViewDidLoad DetailPage');
   }

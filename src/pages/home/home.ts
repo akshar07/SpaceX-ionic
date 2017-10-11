@@ -1,5 +1,5 @@
 import { Component,OnInit } from '@angular/core';
-import { NavController } from 'ionic-angular';
+import { NavController,ModalController } from 'ionic-angular';
 import { PeopleProvider } from '../../providers/people/people';
 import { DetailPage } from '../detail/detail';
 
@@ -10,7 +10,7 @@ import { DetailPage } from '../detail/detail';
 export class HomePage implements OnInit{
  
   public people =[]
-  constructor(public navCtrl: NavController,public peopleService:PeopleProvider) {}
+  constructor(public navCtrl: NavController,public peopleService:PeopleProvider,public modalCtrl:ModalController) {}
 public shouldReorder=false;
 toggleReorder(){
   this.shouldReorder=!this.shouldReorder;
@@ -35,6 +35,7 @@ doInfinite(e){
     )
 }
 pushPage(user){
-  this.navCtrl.push(DetailPage,user).then(res=>console.log(res));
+  this.modalCtrl.create(DetailPage,user).present()
+  // this.navCtrl.push(DetailPage,user).then(res=>console.log(res));
 }
 }

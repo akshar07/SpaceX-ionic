@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController, AlertController, NavParams,ViewController } from 'ionic-angular';
+import {SafeResourceUrl,DomSanitizer} from '@angular/platform-browser';  
 
 /**
  * Generated class for the DetailPage page.
@@ -14,8 +15,8 @@ import { IonicPage, NavController, AlertController, NavParams,ViewController } f
   templateUrl: 'detail.html',
 })
 export class DetailPage {
-  public user=this.navParams.data;
-  constructor(public alertCtrl:AlertController,public viewCtrl:ViewController, public navCtrl: NavController, public navParams: NavParams) {
+  public flight=this.navParams.data;
+  constructor(public sanitizer: DomSanitizer,public alertCtrl:AlertController,public viewCtrl:ViewController, public navCtrl: NavController, public navParams: NavParams) {
   }
   dismiss(){
     let alert = this.alertCtrl.create({
@@ -39,5 +40,7 @@ export class DetailPage {
   ionViewDidLoad() {
     console.log('ionViewDidLoad DetailPage');
   }
-
+videoURL(url){
+   return this.sanitizer.bypassSecurityTrustResourceUrl(url) 
+}
 }

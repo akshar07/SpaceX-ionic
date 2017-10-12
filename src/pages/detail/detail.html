@@ -1,42 +1,25 @@
 <ion-header>
-  
     <ion-navbar>
       <ion-title>Detail</ion-title>
     </ion-navbar>
-  
   </ion-header>
-  
-  
   <ion-content padding>
-  
     <ion-card>
       <ion-item>
-        {{user.name.first}} {{user.name.last}}
-        <ion-avatar item-left>
-  
-          <img [src]="user.picture.large" alt="">
-        </ion-avatar>
-  
+        {{flight.rocket.rocket_name}} |  {{flight.rocket.rocket_type}} 
       </ion-item>
-      <img src="https://unsplash.it/300/150/" alt="">
+        <img src="https://camo.githubusercontent.com/33d3fe11d8531e90a8f33f4129a0a238a6fb8832/68747470733a2f2f692e696d6775722e636f6d2f484f68383645782e6a7067" />
       <ion-card-content>
         <ion-item>
-          <h2>{{user.location.street}}</h2>
-          <p>{{user.location.city}}, {{user.location.state}}</p>
-          <ion-icon name="home" item-left></ion-icon>
-  
+          <p><b>Launch Year :</b> {{flight.launch_year}}</p>
+        </ion-item> 
+        <ion-item>
+          <p><b>Launch Site : </b> {{flight.launch_site.site_name}}
         </ion-item>
         <ion-item>
-          <ion-icon name="call" item-left></ion-icon>
-          <p>{{user.phone}}</p>
+          <p><b>Article Link :</b><a href='{{flight.links.article_link}}'> {{flight.links.article_link}}</a></p>
         </ion-item>
-        <ion-item>
-          <ion-icon name="mail" item-left></ion-icon>
-          <p>{{user.email}}</p>
-        </ion-item>
-  
       </ion-card-content>
     </ion-card>
-    <button ion-button (click)="dismiss()">Close</button>
-  
+    
   </ion-content>

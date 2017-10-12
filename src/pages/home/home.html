@@ -9,7 +9,7 @@
       <ion-buttons end>
         <button ion-button (click)="toggleReorder()">Edit</button>
       </ion-buttons>
-      Contact Book
+      SpaceX Launches
     </ion-title>
   </ion-navbar>
 </ion-header>
@@ -19,15 +19,18 @@
     <ion-refresher-content></ion-refresher-content>
   </ion-refresher>
   <ion-list [reorder]="shouldReorder" 
-            (ionItemReorder)="$event.applyTo(people)"
+            (ionItemReorder)="$event.applyTo(flight)"
            >
-    <ion-item-sliding *ngFor="let person of people"  >
-        <ion-item (click)="pushPage(person)" >
+    <ion-item-sliding *ngFor="let flight of flights"  >
+        <ion-item (click)="pushPage(flight)" >
             <ion-avatar item-left>
-              <img [src]="person.picture.thumbnail" />
+              <img [src]="flight.links.mission_patch" />
             </ion-avatar>
-            {{person.name.first}}{{person.name.last}}
-            <ion-note>{{person.phone}}</ion-note>
+            <h2><b> Rocket:</b> {{flight.rocket.rocket_name}} | <b>Rocket Type:</b> {{flight.rocket.rocket_type}}</h2>
+            <h3>{{flight.details}}</h3>
+            <p><b>Launch Success:</b> {{flight.launch_success}}</p>
+            <ion-badge item-end>{{flight.launch_year}}</ion-badge>
+            <ion-note></ion-note>
           </ion-item>
           <ion-item-options side="right">
             <button ion-button>Hello</button>

@@ -1,6 +1,6 @@
 import { Component,OnInit } from '@angular/core';
 import { NavController,ModalController } from 'ionic-angular';
-import { PeopleProvider } from '../../providers/people/people';
+import { FlightsProvider } from '../../providers/people/people';
 import { DetailPage } from '../detail/detail';
 
 @Component({
@@ -9,33 +9,18 @@ import { DetailPage } from '../detail/detail';
 })
 export class HomePage implements OnInit{
  
-  public people =[]
-  constructor(public navCtrl: NavController,public peopleService:PeopleProvider,public modalCtrl:ModalController) {}
+  public flights =[]
+  constructor(public navCtrl: NavController,public flightService:FlightsProvider,public modalCtrl:ModalController) {}
 public shouldReorder=false;
 toggleReorder(){
   this.shouldReorder=!this.shouldReorder;
 }
 ngOnInit(): void {
-   this.peopleService.getPeople().subscribe((data=>this.people=data.results))
+   this.flightService.getPeople().subscribe((data=>{this.flights=data;
+  console.log(data)}))
 }
-doRefresh(e){
-  this.peopleService.getPeople()
-    .subscribe(
-      data=>this.people.unshift(...data.results),
-      err=>console.log(err),
-      ()=>e.complete()
-    )
-}
-doInfinite(e){
-  this.peopleService.getPeople()
-    .subscribe(
-      data=>this.people.push(...data.results),
-      err=>console.log(err),
-      ()=>e.complete()
-    )
-}
-pushPage(user){
-  this.modalCtrl.create(DetailPage,user).present()
-  // this.navCtrl.push(DetailPage,user).then(res=>console.log(res));
+pushPage(flight){
+  // this.modalCtrl.create(DetailPage,user).present()
+  this.navCtrl.push(DetailPage,flight).then(res=>console.log(res));
 }
 }
